@@ -35,6 +35,24 @@
 #include <netinet/tcp.h>
 #endif
 
+#if defined(__linux__)
+
+/*  conditional define for TCP_FASTOPEN */
+#ifndef TCP_FASTOPEN
+#define TCP_FASTOPEN   23
+#endif
+
+/*  conditional define for MSG_FASTOPEN */
+#ifndef MSG_FASTOPEN
+#define MSG_FASTOPEN   0x20000000
+#endif
+/*  force use of old API */
+#ifdef TCP_FASTOPEN_CONNECT
+#undef TCP_FASTOPEN_CONNECT
+#endif
+
+#endif // __linux__
+
 #ifdef HAVE_NETDB_H
 #include <netdb.h>
 #endif
